@@ -1,0 +1,6 @@
+The assignment is to write a program that administers and grades a math quiz with randomly generated questions of several different kinds. You should target the quiz at an elementary school student who is learning basic arithmetic. The questions should ask the student to perform simple addition, subtraction, multiplication, and division problems. You can include other problems, such as finding remainders, if you want. You should probably stick to integers with a small number of digits.
+
+For each question, the type of problem should be selected at random, and then the numbers that occur in the problem should be randomly generated. (Hint: To get a reasonable division problem, a/b, select b and the answer at random, and compute the value of a.)
+
+The user should have two chances to get the right answer. If the user gets the correct answer to a problem on the first try, they get full credit for the problem. If not, they get a second try. If the user gets the correct answer on the second try, they get half credit. If the user fails to get the correct answer after two tries, tell the user the correct answer.
+The quiz consists of ten questions. At the end of the quiz, output a score along with the number of questions that the user got right on the first try and the number of questions that the user got right on the second try.
