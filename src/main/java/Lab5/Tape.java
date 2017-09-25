@@ -1,32 +1,48 @@
 package Lab5;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Tape {
 
-    private List<Cell> cells = new LinkedList<>();
     private Cell currentCell;
 
+    public Tape() {
+        currentCell = new Cell();
+    }
 
     public void setContent(char content) {
 
-        if(currentCell == null) {
+        if (currentCell == null) {
             currentCell = new Cell();
-        }
-        else {
+        } else {
             currentCell.content = content;
-            cells.add(currentCell);
         }
     }
 
     public void moveRight() {
-        currentCell = currentCell.next;
+        /*Just.. don't touch this! It is work!*/
+        if (currentCell.next == null) {
+            Cell cell = new Cell();
+            cell.content = ' ';
+            cell.prev = currentCell;
+            currentCell.next = cell;
+            currentCell = currentCell.next;
+        } else {
+            currentCell = currentCell.next;
+        }
     }
 
     public void moveLeft() {
-        currentCell = currentCell.prev;
+        /*Just.. don't touch this! It is work too!*/
+        if (currentCell.prev == null) {
+            Cell cell = new Cell();
+            cell.content = ' ';
+            cell.next = currentCell;
+            currentCell.prev = cell;
+            currentCell = currentCell.prev;
+
+        } else {
+            currentCell = currentCell.prev;
+        }
     }
 
     public char getContent() {
@@ -35,7 +51,24 @@ public class Tape {
 
     public String getTapeContents() {
 
-        String builder = cells.stream().map(cell -> String.valueOf(cell.content)).collect(Collectors.joining());
-        return builder;
+        /*temporary variable for save current position*/
+        Cell savedCell = currentCell;
+
+        /*moving to left while not found first cell*/
+        while (!(currentCell.prev == null)) {
+            moveLeft();
+        }
+        /*initialize first cell by finding value*/
+
+        StringBuilder builder = new StringBuilder();
+        while (!(currentCell.next == null)) {
+            builder.append(currentCell.content);
+            moveRight();
+        }
+
+         /*return start position*/
+        currentCell = savedCell;
+
+        return builder.toString();
     }
 }
